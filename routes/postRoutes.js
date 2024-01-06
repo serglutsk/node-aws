@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs/promises');
 const validatePostData = require('../middlewares/validateData');
+const authMiddleware = require('../middlewares/auth');
 const router = express.Router();
 
 async function readData() {
@@ -63,7 +64,7 @@ router.post('/', validatePostData, async (req, res, next) => {
     }
 })
 //UPDATE post
-router.put('/post/:id', validatePostData, async (req, res, next) => {
+router.put('/post/:id', [authMiddleware, validatePostData], async (req, res, next) => {
     try {
         const postId = req.params.id;
         const data = await readData();
