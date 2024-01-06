@@ -5,6 +5,9 @@ WORKDIR /aws
 
 COPY package.json /aws
 COPY app /aws/app
+COPY database /aws
+COPY middlewares /aws
+COPY routes /aws
 
 RUN npm install --omit=dev
 
